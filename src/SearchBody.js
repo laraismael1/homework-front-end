@@ -8,8 +8,8 @@ import './Search.css';
 class SearchBody extends Component {
 
   render() {
-    {if (this.props.searchedGif.length > 0) {
-      return (
+    return (
+      this.props.searchedGif.length > 0 ?
         <div className='search'>
           <h1>{`Your search: ${this.props.search}`}</h1>
           <div className='root'>
@@ -27,8 +27,8 @@ class SearchBody extends Component {
             </GridList>
           </div>
         </div>
-      )
-    } else { return (null) }};
+      : null
+    );
   }
 }
 
