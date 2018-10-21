@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import giphyModules from './GiphyRequests';
+import TrendingBody from './TrendingBody';
+import SearchBar from './SearchBar';
+import SearchBody from './SearchBody';
+import './index.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      search: '',
+      trendingGif: [],
+      searchedGif: []
+    }
+  }
+
+  componentDidMount() {
+    giphyModules.getTrending((data) => {
+      this.setState({ trendingGif: data.data.data })
+    });
+  }
+
+  handleSearch = (query) => {
+    this.setState({ search: query })
+    let querySearch = query.replace(/ /g,'+');
+    giphyModules.getSearch(querySearch, (data) => {
+      this.setState({ searchedGif: data.data.data })
+    })
+  }
+
   render() {
+    console.log('searchedGif', this.state.searchedGif)
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <SearchBar handleSearch={this.handleSearch} />
+        <SearchBody searchedGif={this.state.searchedGif} search={this.state.search}/>
+        <TrendingBody trendingGifs={this.state.trendingGif} />
       </div>
     );
   }
