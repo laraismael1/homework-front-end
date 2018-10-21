@@ -1,0 +1,44 @@
+.searchContainer {
+ text-align: center;
+}
+.searchInput {
+  display: inline-block;
+  flexWrap: wrap;
+  width: 60%;
+  padding:10px 5px;
+}
+
+.searchButton {
+  height: 30px;
+  margin: 30px 20px !important;
+  background-color: lightgray !important;
+}
+
+.search {
+  background-color: black;
+  color: white;
+}
+
+.root {
+  display: flex;
+  flexWrap: wrap;
+  justifyContent: space-around;
+  overflow: hidden;
+}
+
+.gridList {
+  width: 100%;
+  height: 450;
+}
+
+.subheader {
+  width: 100%;
+}
+
+.card {
+  maxWidth: 345,
+}
+
+.media {
+  objectFit: cover;
+}
