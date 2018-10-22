@@ -16,10 +16,12 @@ class TrendingBody extends Component {
             {this.props.trendingGifs.map((gif) => (
               <GridListTile key={gif.id} cols={gif.cols || 1}>
                 <TrendingImage
+                  favorite={this.props.favorite}
+                  url={gif.embed_url}
+                  id={gif.id}
                   imgUrl={gif.images.fixed_height.url}
                   rate={gif.rating}
                   name={gif.title}
-                  url={gif.url}
                 />
               </GridListTile>
             ))}

@@ -42,3 +42,8 @@
 .media {
   objectFit: cover;
 }
+
+.gifList {
+  margin: 10px 30%;
+  padding: 10px;
+}
