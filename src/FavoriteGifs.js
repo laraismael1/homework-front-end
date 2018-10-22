@@ -8,6 +8,7 @@ class FavoriteGifs extends Component {
     super(props);
     this.state = {
       hideFavoriteList: false,
+      favList: [],
     }
   }
 
@@ -20,7 +21,9 @@ class FavoriteGifs extends Component {
   }
 
   toggleFavorite = () => {
+    const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
     this.setState({
+      favList: gifList,
       hideFavoriteList: !this.state.hideFavoriteList
     })
   }
@@ -31,7 +34,7 @@ class FavoriteGifs extends Component {
         <button className='buttonStyle' onClick={this.toggleFavorite}>
           SHOW URL OF FAVORITE GIF
         </button>
-        {this.state.hideFavoriteList && <ListOfFavGifs removeFavorite={this.removeFavorite}/>}
+        {this.state.hideFavoriteList && <ListOfFavGifs removeFavorite={this.removeFavorite} favList={this.state.favList}/> }
       </div>
     )
   }
@@ -40,7 +43,7 @@ class FavoriteGifs extends Component {
 const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
 
 const ListOfFavGifs =  (props) => {
-  const component = gifList.map(gif => (
+  const component = props.favList.map(gif => (
     <Paper key={gif.id} className='gifList'>
       <a href={gif.url}>
         {gif.name}

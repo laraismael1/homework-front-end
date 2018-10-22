@@ -10,13 +10,18 @@ import './Trending.css';
 
 
 class TrendingImage extends Component {
-  // this functions purpose is to refresh the component so the color can be added to the favorite button
+  state = {
+    update: false
+  }
+  // // this functions purpose is to refresh the component so the color can be added to the favorite button
   addFavoriteColor = () => {
-    window.location.reload();
+    this.setState({
+      update: !this.state.update
+    })
   }
 
   render() {
-    const { id, imgUrl, rate, name, url, favorite} = this.props;
+    const { id, imgUrl, rate, name, url, favorite } = this.props;
     const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
     const idList = gifList.map(gif => gif.id);
     let color = idList.indexOf(id) === -1 ? 'white' : '#C915F6';
