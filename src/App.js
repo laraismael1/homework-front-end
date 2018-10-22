@@ -10,7 +10,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       search: '',
       trendingGif: [],
@@ -44,15 +43,21 @@ class App extends Component {
     console.log('!!favorites!!', favorites);
   }
 
-
-
   render() {
     return (
       <div>
-        <SearchBar handleSearch={this.handleSearch} />
+        <SearchBar
+          handleSearch={this.handleSearch}
+        />
         <FavoriteGifs />
-        <SearchBody searchedGif={this.state.searchedGif} search={this.state.search}/>
-        <TrendingBody favorite={this.addToFavoriteGif} trendingGifs={this.state.trendingGif} />
+        <SearchBody
+          searchedGif={this.state.searchedGif}
+          search={this.state.search}
+        />
+        <TrendingBody
+          favorite={this.addToFavoriteGif}
+          trendingGifs={this.state.trendingGif}
+        />
       </div>
     );
   }
