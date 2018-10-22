@@ -26,7 +26,7 @@ class SearchBar extends Component {
     return (
       <div className='searchContainer'>
         <input type="text" value={this.state.search} name="search" className='searchInput' onChange={(e) => this.handleChange(e)}/>
-        <button className='searchButton' onClick={(e) => { this.props.handleSearch(e.currentTarget.previousElementSibling.value); this.resetSearch()}}>
+        <button className='buttonStyle' onClick={(e) => { this.props.handleSearch(e.currentTarget.previousElementSibling.value); this.resetSearch()}}>
           SEARCH
         </button>
       </div>

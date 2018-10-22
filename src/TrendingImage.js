@@ -10,17 +10,16 @@ import './Trending.css';
 
 
 class TrendingImage extends Component {
-  state = {
-    favColor: 'white'
-  }
-  toggleFavoriteColor = () => {
-    this.setState({
-      favColor: '#C915F6'
-    })
+  // this functions purpose is to refresh the component so the color can be added to the favorite button
+  addFavoriteColor = () => {
+    window.location.reload();
   }
 
   render() {
-    const { id, imgUrl, rate, name, url, favorite } = this.props;
+    const { id, imgUrl, rate, name, url, favorite} = this.props;
+    const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
+    const idList = gifList.map(gif => gif.id);
+    let color = idList.indexOf(id) === -1 ? 'white' : '#C915F6';
     return (
       <div>
         <Tooltip title={`Title: ${name} \n Rating: ${rate}`} placement="top">
@@ -43,9 +42,9 @@ class TrendingImage extends Component {
           <input
             type="image"
             className="favorite"
-            style={{background: this.state.favColor}}
+            style={{background: color}}
             src="../favorite.png"
-            onClick={(e) => {e.preventDefault(); favorite(id, name, url); this.toggleFavoriteColor()}}
+            onClick={(e) => {e.preventDefault(); favorite(id, name, url); this.addFavoriteColor()}}
             />
         </Tooltip>
       </div>

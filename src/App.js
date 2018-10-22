@@ -14,6 +14,7 @@ class App extends Component {
       search: '',
       trendingGif: [],
       searchedGif: [],
+      favWasAdd: true,
     }
   }
 
@@ -41,9 +42,13 @@ class App extends Component {
     }
     localStorage.setItem('bardo', JSON.stringify(favorites))
     console.log('!!favorites!!', favorites);
+    this.setState({
+      favWasAdd: !this.state.favWasAdd
+    })
   }
 
   render() {
+    console.log("favListId: ", this.state.favListId);
     return (
       <div>
         <SearchBar

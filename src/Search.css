@@ -8,10 +8,13 @@
   padding:10px 5px;
 }
 
-.searchButton {
+.buttonStyle {
+  border-radius: 15px;
   height: 30px;
   margin: 30px 20px !important;
-  background-color: lightgray !important;
+  background-color: #3B3E59 !important;
+  color: #FEFEFE;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .search {
@@ -45,5 +48,4 @@
 
 .gifList {
   margin: 10px 30%;
-  padding: 10px;
 }
