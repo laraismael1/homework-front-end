@@ -16,6 +16,7 @@ class TrendingBody extends Component {
             {this.props.trendingGifs.map((gif) => (
               <GridListTile key={gif.id} cols={gif.cols || 1}>
                 <TrendingImage
+                  handleFavoriteColor={this.props.handleFavoriteColor}
                   favorite={this.props.favorite}
                   url={gif.embed_url}
                   id={gif.id}
@@ -34,6 +35,8 @@ class TrendingBody extends Component {
 
 TrendingBody.propTypes = {
   trendingGifs: PropTypes.array,
+  handleFavoriteColor: PropTypes.func,
+  favorite: PropTypes.func,
 };
 
 export default TrendingBody;

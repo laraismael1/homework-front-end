@@ -17,6 +17,7 @@ class SearchBody extends Component {
               {this.props.searchedGif.map((gif) => (
                 <GridListTile key={gif.id} cols={gif.cols || 1}>
                   <SearchGif
+                    handleFavoriteColor={this.props.handleFavoriteColor}
                     favorite={this.props.favorite}
                     id={gif.id}
                     imgUrl={gif.images.fixed_height.url}
@@ -36,6 +37,8 @@ class SearchBody extends Component {
 
 SearchBody.propTypes = {
   searchedGif: PropTypes.array,
+  search: PropTypes.string,
+  favorite: PropTypes.func,
 };
 
 export default SearchBody;

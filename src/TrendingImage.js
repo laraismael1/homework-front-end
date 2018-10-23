@@ -5,23 +5,13 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
 import './Trending.css';
 
 
 class TrendingImage extends Component {
-  state = {
-    update: false
-  }
-  // // this functions purpose is to refresh the component so the color can be added to the favorite button
-  addFavoriteColor = () => {
-    this.setState({
-      update: !this.state.update
-    })
-  }
 
   render() {
-    const { id, imgUrl, rate, name, url, favorite } = this.props;
+    const { id, imgUrl, rate, name, url, favorite, handleFavoriteColor } = this.props;
     const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
     const idList = gifList.map(gif => gif.id);
     let color = idList.indexOf(id) === -1 ? 'white' : '#C915F6';
@@ -49,7 +39,7 @@ class TrendingImage extends Component {
             className="favorite"
             style={{background: color}}
             src="../favorite.png"
-            onClick={(e) => {e.preventDefault(); favorite(id, name, url); this.addFavoriteColor()}}
+            onClick={(e) => {e.preventDefault(); favorite(id, name, url); handleFavoriteColor()}}
             />
         </Tooltip>
       </div>
@@ -58,10 +48,13 @@ class TrendingImage extends Component {
 };
 
 TrendingImage.propTypes = {
+  id: PropTypes.string,
   imgUrl: PropTypes.string,
   rate: PropTypes.string,
   name: PropTypes.string,
   url: PropTypes.string,
+  favorite: PropTypes.func,
+  handleFavoriteColor: PropTypes.func,
 };
 
 export default TrendingImage;

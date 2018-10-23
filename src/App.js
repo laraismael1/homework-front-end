@@ -14,6 +14,7 @@ class App extends Component {
       search: '',
       trendingGif: [],
       searchedGif: [],
+      update: false,
     }
   }
 
@@ -21,8 +22,10 @@ class App extends Component {
     giphyModules.getTrending((data) => {
       this.setState({ trendingGif: data.data.data })
     });
-    // var favoritesList = JSON.parse(localStorage.getItem('bardo'));
-    // this.setState({ favList: favoritesList })
+  }
+
+  handleFavoriteColor = () => {
+    this.setState({ update: !this.state.update })
   }
 
   handleSearch = (query) => {
@@ -31,7 +34,6 @@ class App extends Component {
     giphyModules.getSearch(querySearch, (data) => {
       this.setState({ searchedGif: data.data.data })
     })
-    console.log(this.state.searchedGif)
   }
 
   addToFavoriteGif = (id, name, url) => {
@@ -50,13 +52,15 @@ class App extends Component {
         <SearchBar
           handleSearch={this.handleSearch}
         />
-        <FavoriteGifs/>
+        <FavoriteGifs handleFavoriteColor={this.handleFavoriteColor}/>
         <SearchBody
+          handleFavoriteColor={this.handleFavoriteColor}
           favorite={this.addToFavoriteGif}
           searchedGif={this.state.searchedGif}
           search={this.state.search}
         />
         <TrendingBody
+          handleFavoriteColor={this.handleFavoriteColor}
           favorite={this.addToFavoriteGif}
           trendingGifs={this.state.trendingGif}
         />
