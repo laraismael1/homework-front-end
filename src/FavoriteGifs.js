@@ -12,7 +12,8 @@ class FavoriteGifs extends Component {
     this.state = {
       hideFavoriteList: false,
       favList: [],
-      toggle: 'SHOW'
+      toggle: 'SHOW',
+      tooltip: '',
     }
   }
 
@@ -34,6 +35,21 @@ class FavoriteGifs extends Component {
     this.props.handleFavoriteColor();
    }
 
+  manageEmptyFavorite = () => {
+    let tooltipText =
+      this.state.favList.length
+      ? ''
+      : 'You have no favorite gifs.';
+
+      this.setState({
+        tooltip: tooltipText
+      })
+
+      setTimeout(() => (
+        this.setState({ tooltip: ''})
+      ), 5000);
+  }
+
   toggleFavorite = () => {
     const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
 
@@ -49,11 +65,12 @@ class FavoriteGifs extends Component {
   render() {
     return (
       <div>
+        <p className='emptyAlert'>{this.state.tooltip}</p>
         <button
           className='buttonStyle'
-          onClick={this.toggleFavorite}
+          onClick={e => {this.toggleFavorite(); this.manageEmptyFavorite();}}
         >
-          {`${this.state.toggle} URL OF FAVORITE GIF`}
+          {`${this.state.toggle} FAVORITE GIF MANAGER`}
         </button>
         {this.state.hideFavoriteList &&
         <FavoriteList

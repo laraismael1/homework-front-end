@@ -53,5 +53,9 @@
 }
 
 .favList {
-  margin: 10px 30%; 
+  margin: 10px 30%;
+}
+
+.emptyAlert {
+  margin: -10px;
 }
