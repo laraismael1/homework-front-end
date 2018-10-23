@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './Search.css';
+import './Giphys.css';
 
 class SearchBar extends Component {
   constructor(props) {

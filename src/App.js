@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import giphyModules from './GiphyRequests';
-import TrendingBody from './TrendingBody';
+import GifsBody from './GifsBody';
 import SearchBar from './SearchBar';
-import SearchBody from './SearchBody';
 import FavoriteGifs from './FavoriteGifs';
 import './index.css';
 
@@ -52,17 +51,21 @@ class App extends Component {
         <SearchBar
           handleSearch={this.handleSearch}
         />
-        <FavoriteGifs handleFavoriteColor={this.handleFavoriteColor}/>
-        <SearchBody
+        <FavoriteGifs
+          handleFavoriteColor={this.handleFavoriteColor}
+          update={this.state.update}
+        />
+        <GifsBody
           handleFavoriteColor={this.handleFavoriteColor}
           favorite={this.addToFavoriteGif}
-          searchedGif={this.state.searchedGif}
+          gifsList={this.state.searchedGif}
           search={this.state.search}
         />
-        <TrendingBody
+        <GifsBody
           handleFavoriteColor={this.handleFavoriteColor}
           favorite={this.addToFavoriteGif}
-          trendingGifs={this.state.trendingGif}
+          gifsList={this.state.trendingGif}
+          search={null}
         />
       </div>
     );

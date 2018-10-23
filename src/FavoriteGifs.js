@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
+import FavoriteList from './FavoriteList';
 
-import './Search.css';
+import './Giphys.css';
 
 
 class FavoriteGifs extends Component {
@@ -12,7 +12,15 @@ class FavoriteGifs extends Component {
     this.state = {
       hideFavoriteList: false,
       favList: [],
+      toggle: 'SHOW'
     }
+  }
+
+  componentWillReceiveProps() {
+    const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
+    this.setState({
+      favList: gifList,
+    })
   }
 
   removeFavorite = (e) => {
@@ -28,41 +36,38 @@ class FavoriteGifs extends Component {
 
   toggleFavorite = () => {
     const gifList = JSON.parse(localStorage.getItem('bardo')) || [];
+
+    let toggleName = this.state.toggle === 'SHOW' ? 'HIDE' : 'SHOW';
+
     this.setState({
       favList: gifList,
-      hideFavoriteList: !this.state.hideFavoriteList
+      hideFavoriteList: !this.state.hideFavoriteList,
+      toggle: toggleName
     })
   }
 
   render() {
     return (
       <div>
-        <button className='buttonStyle' onClick={this.toggleFavorite}>
-          SHOW URL OF FAVORITE GIF
+        <button
+          className='buttonStyle'
+          onClick={this.toggleFavorite}
+        >
+          {`${this.state.toggle} URL OF FAVORITE GIF`}
         </button>
-        {this.state.hideFavoriteList && <ListOfFavGifs removeFavorite={this.removeFavorite} favList={this.state.favList}/> }
+        {this.state.hideFavoriteList &&
+        <FavoriteList
+          removeFavorite={this.removeFavorite} favList={this.state.favList}
+          update={this.props.update}
+        />}
       </div>
     )
   }
 }
 
-const ListOfFavGifs =  (props) => {
-  const component = props.favList.map(gif => (
-    <Paper key={gif.id} className='gifList'>
-      <a href={gif.url}>
-        {gif.name}
-      </a>
-      <button name={gif.id} className='buttonStyle' onClick={e => props.removeFavorite(e)}>
-        REMOVE
-      </button>
-    </Paper>
-  ))
-  return component;
-};
-
-
 FavoriteGifs.propTypes = {
   handleFavoriteColor: PropTypes.func,
+  update: PropTypes.bool,
 };
 
 export default FavoriteGifs;

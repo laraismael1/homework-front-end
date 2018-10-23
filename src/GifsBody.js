@@ -2,28 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import SearchGif from './SearchGif';
-import './Search.css';
+import GifsList from './GifsList';
+import './Giphys.css';
 
-class SearchBody extends Component {
+class GifsBody extends Component {
 
   render() {
     return (
-      this.props.searchedGif.length > 0 ?
-        <div className='search'>
-          <h1>{`Your search: ${this.props.search}`}</h1>
+      this.props.gifsList.length > 0 ?
+        <div className='gifsBody'>
+          {this.props.search
+            ? <h1>{`Your search: ${this.props.search}`}</h1>
+            : <h1>Trending Gyphs</h1>
+          }
           <div className='root'>
             <GridList cellHeight={160} className='gridList' cols={4}>
-              {this.props.searchedGif.map((gif) => (
-                <GridListTile key={gif.id} cols={gif.cols || 1}>
-                  <SearchGif
+              {this.props.gifsList.map((gif) => (
+                <GridListTile key={gif.id} cols={1}>
+                  <GifsList
                     handleFavoriteColor={this.props.handleFavoriteColor}
                     favorite={this.props.favorite}
                     id={gif.id}
                     imgUrl={gif.images.fixed_height.url}
                     rate={gif.rating}
                     name={gif.title}
-                    url={gif.url}
+                    url={gif.embed_url}
                   />
                 </GridListTile>
               ))}
@@ -35,10 +38,10 @@ class SearchBody extends Component {
   }
 }
 
-SearchBody.propTypes = {
-  searchedGif: PropTypes.array,
-  search: PropTypes.string,
+GifsBody.propTypes = {
+  gifsList: PropTypes.array,
+  handleFavoriteColor: PropTypes.func,
   favorite: PropTypes.func,
 };
 
-export default SearchBody;
+export default GifsBody;

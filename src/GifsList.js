@@ -5,10 +5,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import './Trending.css';
+import './Giphys.css';
 
 
-class TrendingImage extends Component {
+class GifsList extends Component {
 
   render() {
     const { id, imgUrl, rate, name, url, favorite, handleFavoriteColor } = this.props;
@@ -47,7 +47,7 @@ class TrendingImage extends Component {
   }
 };
 
-TrendingImage.propTypes = {
+GifsList.propTypes = {
   id: PropTypes.string,
   imgUrl: PropTypes.string,
   rate: PropTypes.string,
@@ -57,4 +57,4 @@ TrendingImage.propTypes = {
   handleFavoriteColor: PropTypes.func,
 };
 
-export default TrendingImage;
+export default GifsList;
